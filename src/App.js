@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
-//import {Navbar, NavbarBrand} from 'reactstrap';
+import { BrowserRouter} from 'react-router-dom';
 import Main from './components/MainComponent';
 
 
@@ -17,11 +17,11 @@ class App extends Component {
   */
   render() {
     return (
+      <BrowserRouter>
       <div >
-        
-        <Main />
-        
+          <Main />
       </div>
+      </BrowserRouter>
     );
   }
 }
