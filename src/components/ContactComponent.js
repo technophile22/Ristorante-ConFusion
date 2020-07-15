@@ -3,6 +3,7 @@ import {Breadcrumb, BreadcrumbItem, Button,  Label, Col, Row } from 'reactstrap'
 import {Link} from 'react-router-dom';
 import { Control, Form, Errors} from 'react-redux-form';
 
+
 const required =(val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
@@ -21,9 +22,11 @@ class Contact extends Component{
    
 
     handleSubmit(values) {
-        console.log("Curret state is: " + JSON.stringify(values));
-        alert("Curret state is: " + JSON.stringify(values));
+        //console.log("Curret state is: " + JSON.stringify(values));
+        this.props.postFeedback(values);
+        //alert("Curret state is: " + JSON.stringify(values) + "id: ");
         this.props.resetFeedbackForm();
+
 
     }
 
@@ -63,7 +66,7 @@ class Contact extends Component{
                     <div className="col-12 col-sm-11 offset-sm-1">
                         <div className="btn-group" role="group">
                             <a role="button" className="btn btn-primary" href="tel:+85212345678"><i className="fa fa-phone"></i> Call</a>
-                            <a role="button" className="btn btn-info"><i className="fa fa-skype"></i> Skype</a>
+                            <a role="button" className="btn btn-info" href="www.skype.com"><i  className="fa fa-skype"></i> Skype</a>
                             <a role="button" className="btn btn-success" href="mailto:confusion@food.net"><i className="fa fa-envelope-o"></i> Email</a>
                         </div>
                     </div>

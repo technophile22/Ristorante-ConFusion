@@ -1,7 +1,10 @@
+
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
-
+import {Loading } from './LoadingComponent';
+import {baseUrl} from '../shared/baseUrl';
+import {Fade, Stagger} from 'react-animation-components';
 
 function RenderLeader({leaders}) {
     
@@ -10,7 +13,7 @@ function RenderLeader({leaders}) {
             <Media tag="ul">
                 <Media left middle >
                 
-                    <Media object src={leaders.image}  alt={leaders.name} />
+                    <Media object src={baseUrl + leaders.image}  alt={leaders.name} />
 
                 </Media>
                 <Media body className ="ml-5" >
@@ -30,14 +33,41 @@ function RenderLeader({leaders}) {
 
 function About(props) {
 
-   const leaders = props.leaders.map((leaders) => {
+   const leaders = props.leaders.leaders.map((leaders) => {
         return (
             //<p>Leader {leader.name}</p>
             
-
+            <Fade in>
             <RenderLeader leaders ={leaders} />
+            </Fade>
         );
     });
+
+    if(props.leaders.isLoading) {
+        return(
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                    {console.log('This will run loading')}
+                </div>
+            </div>
+        );
+    }
+    else if (props.leaders.errMess) {
+        return(
+            <div className="container">
+                <div className="row">
+                    <div className="col-12">
+                        <h4>{props.leaders.errMess}</h4>
+                        {console.log('This will run error')}
+                    </div>
+                    
+                </div>
+            </div>
+        );
+
+    }
+    else
 
     return(
         <div className="container">
@@ -93,9 +123,11 @@ function About(props) {
                 <div className="col-12">
                     <h2>Corporate Leadership</h2>
                 </div>
-                <div className="col-12">
-                    
-                        {leaders}
+                <div className="col-12 ">
+                <Stagger in>
+                     {leaders}
+                </Stagger>
+                       
                     
                 </div>
             </div>
